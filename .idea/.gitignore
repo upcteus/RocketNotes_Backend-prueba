@@ -7,4 +7,4 @@
 /dataSources/
 /dataSources.local.xml
 # Ignorar archivos específicos
-#.xml
+*.xml
