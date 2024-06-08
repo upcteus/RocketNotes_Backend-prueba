@@ -1,9 +1,9 @@
-package com.acme.center.platform.profiles.domain.model.aggregates;
+package com.fivestars.rocketnotes.profiles.domain.model.aggregates;
 
-import com.acme.center.platform.profiles.domain.model.commands.CreateProfileCommand;
-import com.acme.center.platform.profiles.domain.model.valueobjects.EmailAddress;
-import com.acme.center.platform.profiles.domain.model.valueobjects.PersonName;
-import com.acme.center.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
+import com.fivestars.rocketnotes.profiles.domain.model.commands.CreateProfileCommand;
+import com.fivestars.rocketnotes.profiles.domain.model.valueobjects.EmailAddress;
+import com.fivestars.rocketnotes.profiles.domain.model.valueobjects.PersonName;
+import com.fivestars.rocketnotes.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import jakarta.persistence.*;
 
 @Entity

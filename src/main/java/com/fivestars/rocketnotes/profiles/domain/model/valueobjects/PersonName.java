@@ -1,4 +1,4 @@
-package com.acme.center.platform.profiles.domain.model.valueobjects;
+package com.fivestars.rocketnotes.profiles.domain.model.valueobjects;
 
 import jakarta.persistence.Embeddable;
 
