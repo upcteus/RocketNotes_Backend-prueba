@@ -1,7 +1,7 @@
 package com.fivestars.rocketnotes.profiles.interfaces.rest.resources;
 
-public record ProfileResource(Long firstName,
-                              String lastName,
+public record ProfileResource(Long id,
+                              String fullName,
                               String email) {
 
 }
