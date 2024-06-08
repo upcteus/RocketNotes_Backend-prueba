@@ -21,4 +21,5 @@ public class OpenApiConfiguration {
                         .description("RocketNotes Platform  Platform Wiki Documentation")
                         .url("https://acme-learning-platform.wiki.github.org/docs"));
     }
+
 }
