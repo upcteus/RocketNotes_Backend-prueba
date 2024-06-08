@@ -12,9 +12,11 @@ public class Teacher {
     private Long id;
     private String name;
     private String paternalLastName;
+    private String maternalLastName;
     private String dni;
     private String phone;
     private String email;
+    private String password;
 
     public Long getId() {
         return id;
@@ -62,5 +64,21 @@ public class Teacher {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getMaternalLastName() {
+        return maternalLastName;
+    }
+
+    public void setMaternalLastName(String maternalLastName) {
+        this.maternalLastName = maternalLastName;
     }
 }
