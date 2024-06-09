@@ -27,8 +27,10 @@ public class TeacherService {
     public Teacher updateTeacher(Long id, Teacher teacherDetails) {
         Teacher teacher = teacherRepository.findById(id).orElse(null);
         if (teacher != null) {
-            teacher.setName(teacherDetails.getName());
+            teacher.setFirstName(teacherDetails.getFirstName());
+            teacher.setLastName(teacherDetails.getLastName());
             teacher.setPaternalLastName(teacherDetails.getPaternalLastName());
+            teacher.setMaternalLastName(teacherDetails.getMaternalLastName());
             teacher.setDni(teacherDetails.getDni());
             teacher.setPhone(teacherDetails.getPhone());
             teacher.setEmail(teacherDetails.getEmail());

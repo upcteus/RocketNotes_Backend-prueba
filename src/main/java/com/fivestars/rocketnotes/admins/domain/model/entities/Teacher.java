@@ -10,7 +10,8 @@ public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String paternalLastName;
     private String maternalLastName;
     private String dni;
@@ -22,9 +23,9 @@ public class Teacher {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getFirstName() {return firstName;}
+
+    public String getLastName() {return lastName;}
 
     public String getPaternalLastName() {
         return paternalLastName;
@@ -44,10 +45,6 @@ public class Teacher {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void setPaternalLastName(String paternalLastName) {
@@ -80,5 +77,13 @@ public class Teacher {
 
     public void setMaternalLastName(String maternalLastName) {
         this.maternalLastName = maternalLastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }
