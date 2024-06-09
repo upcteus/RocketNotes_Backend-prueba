@@ -1,50 +1,49 @@
 package com.fivestars.rocketnotes.admins.interfaces.rest;
 
-import com.fivestars.rocketnotes.admins.domain.model.entities.Classroom;
-import com.fivestars.rocketnotes.admins.domain.services.ClassroomService;
+
+import com.fivestars.rocketnotes.admins.domain.model.commands.*;
+import com.fivestars.rocketnotes.admins.domain.services.ClassroomCommandService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/classrooms")
+@RequiredArgsConstructor
 public class ClassroomController {
-    @Autowired
-    private ClassroomService classroomService;
 
-    @GetMapping
-    public List<Classroom> getAllClassrooms() {
-        return classroomService.getAllClassrooms();
-    }
-
-    @GetMapping("/{id}")
-    public Classroom getClassroomById(@PathVariable Long id) {
-        return classroomService.getClassroomById(id);
-    }
+    private final ClassroomCommandService classroomCommandService;
 
     @PostMapping
-    public Classroom createClassroom(@RequestBody Classroom classroom) {
-        return classroomService.createClassroom(classroom);
+    public ResponseEntity<Long> createClassroom(@RequestBody CreateClassroomCommand command) {
+        Long classroomId = classroomCommandService.handle(command);
+        return ResponseEntity.ok(classroomId);
     }
 
-    @PutMapping("/{id}")
-    public Classroom updateClassroom(@PathVariable Long id, @RequestBody Classroom classroomDetails) {
-        return classroomService.updateClassroom(id, classroomDetails);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteClassroom(@PathVariable Long id) {
-        classroomService.deleteClassroom(id);
-    }
-
-    @PostMapping("/{classroomId}/students/{studentId}")
-    public Classroom addStudentToClassroom(@PathVariable Long classroomId, @PathVariable Long studentId) {
-        return classroomService.addStudentToClassroom(classroomId, studentId);
+    @PostMapping("/{classroomId}/students")
+    public ResponseEntity<Void> addStudentToClassroom(@PathVariable Long classroomId, @RequestBody Long studentId) {
+        classroomCommandService.handle(new AddStudentToClassroomCommand(classroomId, studentId));
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{classroomId}/students/{studentId}")
-    public Classroom removeStudentFromClassroom(@PathVariable Long classroomId, @PathVariable Long studentId) {
-        return classroomService.removeStudentFromClassroom(classroomId, studentId);
+    public ResponseEntity<Void> removeStudentFromClassroom(@PathVariable Long classroomId, @PathVariable Long studentId) {
+        classroomCommandService.handle(new RemoveStudentFromClassroomCommand(classroomId, studentId));
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{classroomId}/courses")
+    public ResponseEntity<Long> createCourse(@PathVariable Long classroomId, @RequestBody CreateCourseCommand command) {
+        Long courseId = classroomCommandService.handle(command);
+        return ResponseEntity.ok(courseId);
+    }
+
+    @DeleteMapping("/{classroomId}/courses/{courseId}")
+    public ResponseEntity<Void> deleteCourse(@PathVariable Long classroomId, @PathVariable Long courseId) {
+        classroomCommandService.handle(new DeleteCourseCommand(classroomId, courseId));
+        return ResponseEntity.ok().build();
     }
 }
