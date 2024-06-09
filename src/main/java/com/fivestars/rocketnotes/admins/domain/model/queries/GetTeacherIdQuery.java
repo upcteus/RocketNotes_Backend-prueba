@@ -1,4 +1,4 @@
 package com.fivestars.rocketnotes.admins.domain.model.queries;
 
-public record GetTeacherQuery(Long id) {
+public record GetTeacherIdQuery(Long id) {
 }

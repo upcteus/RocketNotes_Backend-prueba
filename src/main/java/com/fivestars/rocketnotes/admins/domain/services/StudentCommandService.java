@@ -1,6 +1,6 @@
 package com.fivestars.rocketnotes.admins.domain.services;
 
-import com.example.admins.domain.commands.CreateStudentCommand;
+import com.fivestars.rocketnotes.admins.domain.model.commands.CreateStudentCommand;
 
 public interface StudentCommandService {
     Long handle(CreateStudentCommand command);

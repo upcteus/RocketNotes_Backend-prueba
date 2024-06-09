@@ -1,7 +1,8 @@
 package com.fivestars.rocketnotes.admins.application.internal.queryservices;
 
-import com.example.admins.domain.model.aggregates.Student;
-import com.example.admins.infrastructure.persistence.jpa.repositories.StudentRepository;
+import com.fivestars.rocketnotes.admins.domain.model.aggregates.Student;
+import com.fivestars.rocketnotes.admins.domain.services.StudentQueryService;
+import com.fivestars.rocketnotes.admins.infrastructure.persistence.jpa.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +23,4 @@ public class StudentQueryServiceImpl implements StudentQueryService {
     public Student getStudentById(Long id) {
         return studentRepository.findById(id).orElse(null);
     }
-
-    // Implementación de otros métodos de consulta
 }

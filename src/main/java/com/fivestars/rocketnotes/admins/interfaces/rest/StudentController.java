@@ -1,11 +1,11 @@
 package com.fivestars.rocketnotes.admins.interfaces.rest;
 
-import com.example.admins.application.internal.commandservices.StudentCommandService;
-import com.example.admins.application.internal.queryservices.StudentQueryService;
-import com.example.admins.domain.commands.CreateStudentCommand;
-import com.example.admins.domain.model.aggregates.Student;
-import com.example.admins.interfaces.rest.resources.CreateStudentResource;
-import com.example.admins.interfaces.rest.resources.StudentResource;
+import com.fivestars.rocketnotes.admins.domain.model.aggregates.Student;
+import com.fivestars.rocketnotes.admins.domain.model.commands.CreateStudentCommand;
+import com.fivestars.rocketnotes.admins.domain.services.StudentCommandService;
+import com.fivestars.rocketnotes.admins.domain.services.StudentQueryService;
+import com.fivestars.rocketnotes.admins.interfaces.rest.resources.CreateStudentResource;
+import com.fivestars.rocketnotes.admins.interfaces.rest.resources.StudentResource;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/api/v1/students")
 @RequiredArgsConstructor
 public class StudentController {
 
@@ -22,12 +22,12 @@ public class StudentController {
 
     @PostMapping
     public Long createStudent(@RequestBody CreateStudentResource createStudentResource) {
-        CreateStudentCommand command = CreateStudentCommand.builder()
-                .firstName(createStudentResource.getFirstName())
-                .paternalLastName(createStudentResource.getPaternalLastName())
-                .maternalLastName(createStudentResource.getMaternalLastName())
-                .dni(createStudentResource.getDni())
-                .build();
+        CreateStudentCommand command = new CreateStudentCommand(
+                createStudentResource.getFirstName(),
+                createStudentResource.getPaternalLastName(),
+                createStudentResource.getMaternalLastName(),
+                createStudentResource.getDni()
+        );
         return studentCommandService.handle(command);
     }
 
@@ -45,4 +45,14 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public StudentResource getStudentById
+    public StudentResource getStudentById(@PathVariable Long id) {
+        Student student = studentQueryService.getStudentById(id);
+        return StudentResource.builder()
+                .id(student.getId())
+                .firstName(student.getFirstName())
+                .paternalLastName(student.getPaternalLastName())
+                .maternalLastName(student.getMaternalLastName())
+                .dni(student.getDni())
+                .build();
+    }
+}

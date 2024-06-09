@@ -1,40 +1,64 @@
 package com.fivestars.rocketnotes.admins.interfaces.rest;
 
-import com.fivestars.rocketnotes.admins.domain.model.entities.Teacher;
-import com.fivestars.rocketnotes.admins.domain.services.TeacherService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fivestars.rocketnotes.admins.domain.model.aggregates.Teacher;
+import com.fivestars.rocketnotes.admins.domain.model.commands.CreateTeacherCommand;
+import com.fivestars.rocketnotes.admins.domain.services.TeacherCommandService;
+import com.fivestars.rocketnotes.admins.domain.services.TeacherQueryService;
+import com.fivestars.rocketnotes.admins.interfaces.rest.resources.CreateTeacherResource;
+import com.fivestars.rocketnotes.admins.interfaces.rest.resources.TeacherResource;
 import org.springframework.web.bind.annotation.*;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/teachers")
+@RequestMapping("/api/v1/teachers")
+@RequiredArgsConstructor
 public class TeacherController {
-    @Autowired
-    private TeacherService teacherService;
+
+    private final TeacherCommandService teacherCommandService;
+    private final TeacherQueryService teacherQueryService;
+
+    @PostMapping
+    public Long createTeacher(@RequestBody CreateTeacherResource createTeacherResource) {
+        CreateTeacherCommand command = new CreateTeacherCommand(
+                createTeacherResource.getFirstName(),
+                createTeacherResource.getPaternalLastName(),
+                createTeacherResource.getMaternalLastName(),
+                createTeacherResource.getDni(),
+                createTeacherResource.getPhone(),
+                createTeacherResource.getEmail()
+        );
+        return teacherCommandService.handle(command);
+    }
 
     @GetMapping
-    public List<Teacher> getAllTeachers() {
-        return teacherService.getAllTeachers();
+    public List<TeacherResource> getAllTeachers() {
+        return teacherQueryService.getAllTeachers().stream()
+                .map(teacher -> TeacherResource.builder()
+                        .id(teacher.getId())
+                        .firstName(teacher.getFirstName())
+                        .paternalLastName(teacher.getPaternalLastName())
+                        .maternalLastName(teacher.getMaternalLastName())
+                        .dni(teacher.getDni())
+                        .phone(teacher.getPhone())
+                        .email(teacher.getEmail())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public Teacher getTeacherById(@PathVariable Long id) {
-        return teacherService.getTeacherById(id);
-    }
-
-    @PostMapping
-    public Teacher createTeacher(@RequestBody Teacher teacher) {
-        return teacherService.createTeacher(teacher);
-    }
-
-    @PutMapping("/{id}")
-    public Teacher updateTeacher(@PathVariable Long id, @RequestBody Teacher teacherDetails) {
-        return teacherService.updateTeacher(id, teacherDetails);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteTeacher(@PathVariable Long id) {
-        teacherService.deleteTeacher(id);
+    public TeacherResource getTeacherById(@PathVariable Long id) {
+        Teacher teacher = teacherQueryService.getTeacherById(id);
+        return TeacherResource.builder()
+                .id(teacher.getId())
+                .firstName(teacher.getFirstName())
+                .paternalLastName(teacher.getPaternalLastName())
+                .maternalLastName(teacher.getMaternalLastName())
+                .dni(teacher.getDni())
+                .phone(teacher.getPhone())
+                .email(teacher.getEmail())
+                .build();
     }
 }

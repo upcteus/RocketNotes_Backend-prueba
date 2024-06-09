@@ -1,6 +1,7 @@
 package com.fivestars.rocketnotes.admins.domain.services;
 
-import com.example.admins.domain.model.aggregates.Teacher;
+
+import com.fivestars.rocketnotes.admins.domain.model.aggregates.Teacher;
 
 import java.util.List;
 

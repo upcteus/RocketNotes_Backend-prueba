@@ -25,4 +25,13 @@ public class Teacher {
     private String dni;
     private String phone;
     private String email;
+
+    public Teacher(String firstName, String paternalLastName, String maternalLastName, String dni, String phone, String email) {
+        this.firstName = firstName;
+        this.paternalLastName = paternalLastName;
+        this.maternalLastName = maternalLastName;
+        this.dni = dni;
+        this.phone = phone;
+        this.email = email;
+    }
 }

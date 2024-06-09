@@ -1,7 +1,8 @@
 package com.fivestars.rocketnotes.admins.application.internal.queryservices;
 
-import com.example.admins.domain.model.aggregates.Teacher;
-import com.example.admins.infrastructure.persistence.jpa.repositories.TeacherRepository;
+import com.fivestars.rocketnotes.admins.domain.model.aggregates.Teacher;
+import com.fivestars.rocketnotes.admins.domain.services.TeacherQueryService;
+import com.fivestars.rocketnotes.admins.infrastructure.persistence.jpa.repositories.TeacherRepository;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -22,5 +23,4 @@ public class TeacherQueryServiceImpl implements TeacherQueryService {
     public Teacher getTeacherById(Long id) {
         return teacherRepository.findById(id).orElse(null);
     }
-
 }

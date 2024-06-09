@@ -23,4 +23,11 @@ public class Student {
     private String paternalLastName;
     private String maternalLastName;
     private String dni;
+
+    public Student(String firstName, String paternalLastName, String maternalLastName, String dni) {
+        this.firstName = firstName;
+        this.paternalLastName = paternalLastName;
+        this.maternalLastName = maternalLastName;
+        this.dni = dni;
+    }
 }
