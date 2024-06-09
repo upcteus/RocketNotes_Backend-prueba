@@ -7,5 +7,5 @@ public class TeacherDetails {
     private String phone;
     private String email;
 
-    // Constructors, Getters, and Setters
+
 }

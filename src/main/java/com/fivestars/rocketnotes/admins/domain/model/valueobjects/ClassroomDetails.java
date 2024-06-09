@@ -5,5 +5,4 @@ public class ClassroomDetails {
     private String section;
     private int capacity;
 
-    // Constructors, Getters, and Setters
 }
