@@ -1,6 +1,5 @@
 package com.fivestars.rocketnotes.admins.domain.model.aggregates;
 
-import com.fivestars.rocketnotes.admins.domain.model.entities.Course;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;

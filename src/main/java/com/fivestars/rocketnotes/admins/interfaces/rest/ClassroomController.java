@@ -1,7 +1,7 @@
 package com.fivestars.rocketnotes.admins.interfaces.rest;
 
 import com.fivestars.rocketnotes.admins.domain.model.entities.Classroom;
-import com.fivestars.rocketnotes.admins.domain.services.ClassroomService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

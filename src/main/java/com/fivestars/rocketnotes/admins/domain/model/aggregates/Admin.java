@@ -14,15 +14,13 @@ import lombok.AllArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Teacher {
+public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String firstName;
-    private String paternalLastName;
-    private String maternalLastName;
-    private String dni;
-    private String phone;
+    private String lastName;
     private String email;
+    private String password;
 }
