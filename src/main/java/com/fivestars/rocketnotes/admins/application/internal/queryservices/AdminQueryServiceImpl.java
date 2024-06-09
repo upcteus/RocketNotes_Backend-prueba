@@ -1,7 +1,8 @@
 package com.fivestars.rocketnotes.admins.application.internal.queryservices;
 
-import com.example.admins.domain.model.aggregates.Admin;
-import com.example.admins.infrastructure.persistence.jpa.repositories.AdminRepository;
+import com.fivestars.rocketnotes.admins.domain.model.aggregates.Admin;
+import com.fivestars.rocketnotes.admins.domain.services.AdminQueryService;
+import com.fivestars.rocketnotes.admins.infrastructure.persistence.jpa.repositories.AdminRepository;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -22,5 +23,4 @@ public class AdminQueryServiceImpl implements AdminQueryService {
     public Admin getAdminById(Long id) {
         return adminRepository.findById(id).orElse(null);
     }
-
 }

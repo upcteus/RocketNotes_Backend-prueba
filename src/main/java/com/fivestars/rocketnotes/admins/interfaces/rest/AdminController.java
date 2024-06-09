@@ -1,11 +1,11 @@
 package com.fivestars.rocketnotes.admins.interfaces.rest;
 
-import com.example.admins.application.internal.commandservices.AdminCommandService;
-import com.example.admins.application.internal.queryservices.AdminQueryService;
-import com.example.admins.domain.commands.CreateAdminCommand;
-import com.example.admins.domain.model.aggregates.Admin;
-import com.example.admins.interfaces.rest.resources.AdminResource;
-import com.example.admins.interfaces.rest.resources.CreateAdminResource;
+import com.fivestars.rocketnotes.admins.domain.model.aggregates.Admin;
+import com.fivestars.rocketnotes.admins.domain.model.commands.CreateAdminCommand;
+import com.fivestars.rocketnotes.admins.domain.services.AdminCommandService;
+import com.fivestars.rocketnotes.admins.domain.services.AdminQueryService;
+import com.fivestars.rocketnotes.admins.interfaces.rest.resources.AdminResource;
+import com.fivestars.rocketnotes.admins.interfaces.rest.resources.CreateAdminResource;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/admins")
+@RequestMapping("/api/v1/admins")
 @RequiredArgsConstructor
 public class AdminController {
 
@@ -22,12 +22,12 @@ public class AdminController {
 
     @PostMapping
     public Long createAdmin(@RequestBody CreateAdminResource createAdminResource) {
-        CreateAdminCommand command = CreateAdminCommand.builder()
-                .firstName(createAdminResource.getFirstName())
-                .lastName(createAdminResource.getLastName())
-                .email(createAdminResource.getEmail())
-                .password(createAdminResource.getPassword())
-                .build();
+        CreateAdminCommand command = new CreateAdminCommand(
+                createAdminResource.getFirstName(),
+                createAdminResource.getLastName(),
+                createAdminResource.getEmail(),
+                createAdminResource.getPassword()
+        );
         return adminCommandService.handle(command);
     }
 

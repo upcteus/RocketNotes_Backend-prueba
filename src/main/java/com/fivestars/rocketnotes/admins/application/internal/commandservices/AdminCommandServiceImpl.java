@@ -1,10 +1,11 @@
 package com.fivestars.rocketnotes.admins.application.internal.commandservices;
 
 import com.fivestars.rocketnotes.admins.domain.model.aggregates.Admin;
+import com.fivestars.rocketnotes.admins.domain.model.commands.CreateAdminCommand;
+import com.fivestars.rocketnotes.admins.domain.services.AdminCommandService;
 import com.fivestars.rocketnotes.admins.infrastructure.persistence.jpa.repositories.AdminRepository;
-import com.fivestars.rocketnotes.admins.domain.commands.CreateAdminCommand;
-import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -14,13 +15,12 @@ public class AdminCommandServiceImpl implements AdminCommandService {
 
     @Override
     public Long handle(CreateAdminCommand command) {
-        Admin admin = Admin.builder()
-                .firstName(command.getFirstName())
-                .lastName(command.getLastName())
-                .email(command.getEmail())
-                .password(command.getPassword())
-                .build();
-        return adminRepository.save(admin).getId();
+        Admin admin = new Admin(
+                command.firstName(),
+                command.lastName(),
+                command.email(),
+                command.password());
+        adminRepository.save(admin);
+        return admin.getId();
     }
-
 }
