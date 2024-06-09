@@ -6,5 +6,5 @@ public class StudentDetails {
     private String maternalLastName;
     private String dni;
 
-    // Constructors, Getters, and Setters
+
 }

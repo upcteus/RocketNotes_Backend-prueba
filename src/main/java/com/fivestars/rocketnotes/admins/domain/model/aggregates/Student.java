@@ -17,5 +17,4 @@ public class Student {
     @JoinColumn(name = "classroom_id")
     private Classroom classroom;
 
-    // Getters and Setters
 }
