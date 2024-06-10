@@ -6,6 +6,7 @@ import com.fivestars.rocketnotes.admins.domain.services.AdminCommandService;
 import com.fivestars.rocketnotes.admins.domain.services.AdminQueryService;
 import com.fivestars.rocketnotes.admins.interfaces.rest.resources.AdminResource;
 import com.fivestars.rocketnotes.admins.interfaces.rest.resources.CreateAdminResource;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/admins")
+@Tag(name = "Admins", description = "Admins API")
 @RequiredArgsConstructor
 public class AdminController {
 
