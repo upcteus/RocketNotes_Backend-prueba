@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/api/courses")
+@RequestMapping("/api/v1/courses")
 @RequiredArgsConstructor
 public class CourseController {
 
